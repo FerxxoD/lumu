@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug CucumberTestSuite (All Tests)",
+            "request": "launch",
+            "mainClass": "org.junit.platform.console.ConsoleLauncher",
+            "projectName": "LUMU",
+            "args": [
+                "--select-class=starter.CucumberTestSuite"
+            ],
+            "classPaths": ["${workspaceFolder}/build/classes/java/test"],
+            "sourcePaths": ["${workspaceFolder}/src/test/java"]
+        },
+        {
+            "type": "java",
+            "name": "Debug CucumberTestSuite via JUnit",
+            "request": "launch",
+            "mainClass": "starter.CucumberTestSuite",
+            "projectName": "LUMU",
+            "classPaths": ["${workspaceFolder}/build/classes/java/test"],
+            "sourcePaths": ["${workspaceFolder}/src/test/java"]
+        },
+        {
+            "type": "java",
+            "name": "Attach to Gradle (Remote Debug)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+        }
+    ]
+}
