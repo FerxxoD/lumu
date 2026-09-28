@@ -3,7 +3,6 @@ package starter.home;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import io.cucumber.java.lu.a;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.ensure.Ensure;
@@ -15,14 +14,14 @@ import starter.helper.TextAnalyzer;
  * ChecksCounted
  */
 public class ChecksCounted {
-
+    public static TextAnalyzer textAnalyzer;
     public static Performable is() {
         return Task.where("{0} checks words and characters counted",
             actor -> {
                 Await.until(4);
                 String text = actor.recall("text").toString().trim();
                 StringBuilder countedText = new StringBuilder();
-                TextAnalyzer textAnalyzer = new TextAnalyzer(text);
+                textAnalyzer = new TextAnalyzer(text);
                 actor.remember("wordCount", textAnalyzer.wordCount());
                 countedText.append(textAnalyzer.wordCount() + " words " + textAnalyzer.characterCount()+ " characters");
                 String textCounted = actor.asksFor(Text.of(homePage.SPAN_COUNTED)).trim();
@@ -35,7 +34,7 @@ public class ChecksCounted {
         return Task.where(
             "{0} checks text density",
             actor -> {
-                int wordCount = actor.recall("wordCount");
+                int wordCount = new TextAnalyzer(actor.recall("text")).wordCount();
                 Map<String, String> density = new LinkedHashMap<>();
                 for (int i=0; i < wordCount; i++){
                     density.put(
